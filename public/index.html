@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PugSharky Broadcast</title>
+   <script>
+    async function loadApp() {
+      const res = await fetch('/config');  // Pobieramy config z backendu
+      const config = await res.json();
+
+      // Dynamically load CSS
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = config.base_path + '/style.css';
+      document.head.appendChild(link);
+      //Dynamically load main.js
+      const script = document.createElement('script');
+      script.src = config.base_path + '/main.js';
+      document.body.appendChild(script);
+      window.appConfig = config;
+    }
+    loadApp();
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="main">
+      <!-- Twitch video embed (channel set dynamically via JS) -->
+      <iframe id="twitch-player" allowfullscreen></iframe>
+
+      <div class="scoreboard" id="scoreboard">
+        <div id="team1"></div>
+        <div id="score"></div>
+        <div id="team2"></div>
+      </div>
+
+      <div class="players" id="players">
+        <!-- Player cards inserted dynamically -->
+      </div>
+    </div>
+
+    <!-- Twitch chat (channel set dynamically via JS) -->
+    <iframe class="chat" id="twitch-chat"></iframe>
+  </div>
+
+</body>
+</html>

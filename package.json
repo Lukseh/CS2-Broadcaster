@@ -1,0 +1,17 @@
+{
+  "name": "web-broadcast-cs2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "json5": "^2.2.3",
+    "pm2": "^6.0.8"
+  },
+  "scripts": {
+    "start": "node web-broadcast-server.js",
+    "startprod": "pm2 start web-broadcast-server.js --name web-broadcast-cs2",
+    "stopprod": "pm2 stop web-broadcast-cs2"
+  }
+}

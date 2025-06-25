@@ -1,5 +1,33 @@
-﻿################################################################################
-# Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
-################################################################################
+﻿# Node modules
+/node_modules/
 
-/node_modules
+# Logi PM2
+pm2.log
+pm2-error.log
+pm2-out.log
+
+# PM2 dump / pid / socket files (jeśli używasz pm2 save)
+/ecosystem.config.js
+# jeśli masz plik dump PM2 (np. dump.pm2)
+dump.pm2
+
+# Środowiskowe pliki konfiguracyjne (jeśli masz, nie chcesz wrzucać sekretów)
+/.env
+.env.local
+.env.*.local
+
+# Build output (jeśli masz bundler, np. webpack)
+/dist/
+/build/
+
+# VSCode settings
+.vscode/
+
+# Systemowe pliki
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+/.vs/WEB-BROADCAST-CS2
+/.vs
