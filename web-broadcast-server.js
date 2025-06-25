@@ -1,76 +1,35 @@
-//Requirements
 const express = require("express");
 const fs = require("fs");
-const cors = require("cors");
 const path = require("path");
-const JSON5 = require('json5');
+const JSON5 = require("json5");
 
-//Configuration
-let gsiData = {};
-let config = {
-  twitch_channel: "default",
-  team_left: "Team Left",
-  team_right: "Team Right",
-  delay_ms: 8000,
-};
-
-//Initialization of process
 const app = express();
 const CONFIG_PATH = process.env.CONFIG || "./config.json5";
-//Load JSON or JSON5 config file
-  if (fs.existsSync(CONFIG_PATH)) {
-    const userConfig = JSON5.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
-    config = { ...config, ...userConfig };
-  }
-//
-const PORT = config.port || 8740; // use from config or fall back to 8740
-const BASE_PATH = config.base_path || '/primary';  // Use from config or fall back to primary
+const config = JSON5.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
 
-app.use(cors());
-app.use(express.json());
+config.instances.forEach(instance => {
+    const { base_path, name, twitch_channel } = instance;
 
-//Serve dynamic HTML
-app.get(BASE_PATH + "/", (req, res) => {
-  const html = fs.readFileSync(path.join(__dirname, "public", "index.html"), "utf8");
-  const injected = html
-    .replace(/__TWITCH_CHANNEL__/g, config.twitch_channel)
-    .replace(/__TEAM_LEFT__/g, config.team_left)
-    .replace(/__TEAM_RIGHT__/g, config.team_right)
-    .replace(/__PARENT_DOMAIN__/g, config.parent_domain);
-  res.send(injected);
+    // Serve static files from /public (HTML, JS, etc.)
+    app.use(base_path, express.static(path.join(__dirname, "public")));
+
+    // GSI endpoint for each instance
+    app.get(`${base_path}/state`, (req, res) => {
+        // Replace this with real GSI logic per instance
+        res.json({
+            gsi: { allplayers: {/* simulated player state */ } },
+            config: {
+                delay_ms: config.delay_ms,
+                twitch_channel,
+                team_left: "Team A",
+                team_right: "Team B"
+            }
+        });
+    });
+
+    console.log(`Overlay running at http://localhost:8740${base_path}`);
 });
 
-//Serving assets used by primary instances
-const isPrimary = config.primary === true;
-if (isPrimary) {
-    app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
-}
-
-//Static files (JS, CSS, etc.) from public directory
-app.use(BASE_PATH, express.static(path.join(__dirname, "public")));
-
-//Dynamic config endpoint
-app.get('/config', (req, res) => {
-  if (fs.existsSync(CONFIG_PATH)) {
-    const userConfig = JSON5.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
-    config = { ...config, ...userConfig };
-  }
-  res.json(config); 
-});
-
-
-//Create endpoint for GSI to send data to
-app.post(BASE_PATH + "/gsi", (req, res) => {
-  gsiData = req.body;
-  res.sendStatus(200);
-});
-
-//Create endpoint to get gsi data + config for page to load
-app.get(BASE_PATH + "/state", (req, res) => {
-  res.json({ gsi: gsiData, config });
-});
-
-//Give url to proxy with cloudlfared tunnel (tested) or nginx/apache/caddy (untested)
-app.listen(PORT, () => {
-  console.log(`Overlay running on http://localhost:${PORT}${BASE_PATH}`);
+app.listen(8740, () => {
+    console.log("Server listening on port 8740");
 });

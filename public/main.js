@@ -5,6 +5,10 @@ let renderDelay = 8000; //Stream delay fallback default
 let lastConfig = null;
 
 async function fetchState() {
+    const basePath = window.location.pathname.split('/')[1]; // "primary" or "secondary"
+    window.appConfig = {
+        base_path: `/${basePath}`
+    };
   try {
     const res = await fetch(`${config.base_path}/state`);
     const data = await res.json();
