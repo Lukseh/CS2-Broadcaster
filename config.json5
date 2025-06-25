@@ -11,7 +11,7 @@
   //Ensure you have the same token in gsi .cfg file
   "auth_token": "",
   //Keep it your public domain you're gonna host on without /PATH
-  "parent_domain": "lukseh.org",
+  "parent_domain": "domain",
   //Change port
   "port": 8740
 }
