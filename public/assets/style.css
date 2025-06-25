@@ -1,0 +1,236 @@
+body {
+  margin: 0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+iframe {
+  border: none;
+  width: 100%;
+  height: 50vh;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  background: #111;
+  color: white;
+}
+
+.players {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px;
+  background: #000;
+  color: white;
+  flex: 1;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.player-card {
+  background: #1a1a1a;
+  padding: 7px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.95em;
+}
+
+.health-bar {
+  background: #333;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.health-fill {
+  background: limegreen;
+  height: 100%;
+}
+
+.chat {
+  width: 350px;
+  height: 100%;
+}
+
+.label {
+  color: #aaa;
+  font-size: 0.8em;
+}
+nav {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #222;
+    color: white;
+    padding: 0 20px;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    padding-top: 60px;
+}
+#players {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px;
+    overflow-y: auto; /* Allows scrolling if too tall */
+    max-height: calc(100vh - 150px); /* Adjust based on NavBar height */
+}
+#players > div {
+  flex: 1 1 45%;
+  min-width: 250px;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* or auto if you prefer scroll */
+}
+@keyframes flashWhite {
+    0% {
+        outline: 2px solid white;
+    }
+
+    100% {
+        outline: none;
+    }
+}
+
+.player-card.flash {
+    animation: flashWhite 0.5s ease-out;
+}
+.player-card {
+    position: relative;
+    transition: background-color 0.5s ease;
+    background-color: transparent;
+    /* optional base style */
+}
+
+    .player-card.flashed {
+        background-color: rgba(255, 255, 255, 0.3); /* white backlight */
+        transition: background-color 1s ease-out;
+    }
+
+    .player-card.hurt {
+        animation: hurtFlash 0.3s ease;
+    }
+
+@keyframes hurtFlash {
+    0% {
+        box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.8);
+        background-color: rgba(255, 0, 0, 0.3);
+    }
+
+    100% {
+        box-shadow: none;
+        background-color: transparent;
+    }
+}
+.player-card {
+    border-bottom: 1px solid #444;
+    padding: 8px 12px;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: #222;
+    margin-bottom: 4px;
+    transition: background-color 0.5s ease;
+    position: relative;
+}
+
+.player-name {
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 1.1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-stats {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    font-size: 0.9em;
+}
+
+.stat {
+    white-space: nowrap;
+}
+
+.weapon-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    filter: invert(100%) brightness(150%);
+}
+
+.health-bar {
+    background: #555;
+    border-radius: 3px;
+    height: 6px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.health-fill {
+    background: #4caf50;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.player-card.flashed {
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 1s ease-out;
+}
+
+.player-card.hurt {
+    animation: hurtFlash 0.3s ease;
+}
+
+@keyframes hurtFlash {
+    0% {
+        box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.8);
+        background-color: rgba(255, 0, 0, 0.3);
+    }
+
+    100% {
+        box-shadow: none;
+        background-color: #222;
+    }
+}
+.weapon-icon img {
+    height: 24px;
+    vertical-align: middle;
+    filter: invert(1); /* optional, if your SVGs are dark and your background is dark */
+}

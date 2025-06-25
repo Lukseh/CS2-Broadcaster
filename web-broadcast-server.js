@@ -40,6 +40,12 @@ app.get(BASE_PATH + "/", (req, res) => {
   res.send(injected);
 });
 
+//Serving assets used by primary instances
+const isPrimary = config.primary === true;
+if (isPrimary) {
+    app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
+}
+
 //Static files (JS, CSS, etc.) from public directory
 app.use(BASE_PATH, express.static(path.join(__dirname, "public")));
 
