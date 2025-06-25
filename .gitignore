@@ -6,6 +6,10 @@ pm2.log
 pm2-error.log
 pm2-out.log
 
+
+# config
+config.json5
+
 # PM2 dump / pid / socket files (jeśli używasz pm2 save)
 /ecosystem.config.js
 # jeśli masz plik dump PM2 (np. dump.pm2)

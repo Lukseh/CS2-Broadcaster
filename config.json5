@@ -1,6 +1,6 @@
 {
   //Base path. for example tv.example.com/PATH, may be primary, match id or anything you like
-  "base_path": "/secondary",
+  "base_path": "/primary",
   //Twitch channel name, NOT LINK!
   "twitch_channel": "pugsharky",
   //Delay in milliseconds ( use SECONDS*1000 )
@@ -11,7 +11,7 @@
   //Ensure you have the same token in gsi .cfg file
   "auth_token": "priv",
   //Keep it your public domain you're gonna host on without /PATH
-  "parent_domain": "localhost",
+  "parent_domain": "lukseh.org",
   //Change port
   "port": 8740
 }
