@@ -12,6 +12,6 @@
   "scripts": {
     "start": "node web-broadcast-server.js",
     "startprod": "pm2 start web-broadcast-server.js --name web-broadcast-cs2",
-    "stopprod": "pm2 stop web-broadcast-cs2"
+    "stopprod": "pm2 delete web-broadcast-cs2"
   }
 }
