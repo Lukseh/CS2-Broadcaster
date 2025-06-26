@@ -1,223 +1,240 @@
-/* ========== general page layout ================================= */
-html,
-body {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    margin: 0;
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-    font-family: sans-serif;
+/* ----------------------------------------------------------
+   style.css – overlay + Twitch layout
+   -------------------------------------------------------- */
+
+/* ========== RESET / BASE ================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Microsoft YaHei', sans-serif;
+  font-weight: light;
+  background: #111;
+  color: #eee;
+}
+
+/* ========== COLOR VARIABLES ============================== */
+:root {
+  --bg-transparent: rgba(0, 0, 0, 0.65);
+  --border-faint:   rgba(255, 255, 255, 0.18);
+  --hp-green:       #3fcf3f;
+  --hp-red:         #d33;
+  --team-t:         #ff7e4d;
+  --team-ct:        #4da4ff;
+}
+
+/* ========== TOP NAV ====================================== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  padding: 0 1rem;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+nav img {
+  height: 38px;
+  width: auto;
+}
+
+nav select {
+  margin-left: auto;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background: #444;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* remove default arrow in Safari */
+nav select::-webkit-appearance {
+  -webkit-appearance: none;
+          appearance: none;
+}
+
+nav option {
+  background: #222;
+  color: #eee;
+}
+
+/* ========== MAIN LAYOUT ================================= */
 .container {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+  height: 100%;
+  padding-top: 50px;          /* leave space for nav */
+  display: flex;
 }
 
 .main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  flex: 1 1 auto;
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+  width: 60vw;
+  background-image: url(https://raw.githubusercontent.com/ghostcap-gaming/cs2-map-images/refs/heads/main/cs2/de_cache.png);
+  background-position-y: bottom;
+}
+
+.chat {
+  width: 25vw;
+  border: none;
+}
+
+/* Hide chat on small screens */
+@media (max-width: 1200px) {
+  .chat { display: none; }
 }
 
 iframe {
-    border: none;
-    width: 100%;
-    height: 50vh;
+  display: block;
 }
 
-.scoreboard {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    font-size: 1.5em;
-    background: #111;
-    color: white;
-}
-
-.players {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 10px;
-    background: #000;
-    color: white;
-    flex: 1;
-    gap: 10px;
-    overflow-y: auto;
-}
-
-.player-card {
-    background: #1a1a1a;
-    padding: 7px;
-    border-radius: 10px;
-    border: 1px solid #333;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 0.95em;
-}
-
-.health-bar {
-    background: #333;
-    height: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.health-fill {
-    background: limegreen;
-    height: 100%;
-}
-
-.chat {
-    width: 350px;
-    height: 100%;
-}
-
-.label {
-    color: #aaa;
-    font-size: 0.8em;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background-color: #222;
-    color: white;
-    padding: 0 20px;
-    z-index: 1000;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    padding-top: 60px;
-}
-
-#players {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 20px;
-    gap: 20px;
-    overflow-y: auto; /* Allows scrolling if too tall */
-    max-height: calc(100vh - 150px); /* Adjust based on NavBar height */
-}
-
-    #players > div {
-        flex: 1 1 45%;
-        min-width: 250px;
-    }
-
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden; /* or auto if you prefer scroll */
-}
-
-@keyframes flashWhite {
-    0% {
-        outline: 2px solid white;
-    }
-
-    100% {
-        outline: none;
-    }
-=======
-  margin: 0;
+/* Twitch player fills the main column */
+#twitch-player {
+  width: 100%;
   height: 100%;
-  background: #000;
-  color: #fff;
-  font-family: sans-serif;
-  overflow-y: hidden;
-}
-
-.container {
-  display: flex;
-  height: 100%;
-}
-
-.main {
-  flex: 1;
-  height: calc(100% - 60px);
-  overflow-y: scroll;
-  width: 70vw;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  padding: 6px 12px;
-  background: #222;
-  color: #fff;
-  position: sticky;
-  top: 0;
-}
-
-/* video keeps full width; 16 : 9 ratio so the height collapses nicely */
-iframe#twitch-player {
-  width: 70vw;
-  aspect-ratio: 16 / 9;
   border: none;
 }
 
-/* === block that now lives under the video ========================= */
+/* ========== OVERLAY BLOCK ================================ */
 .overlay-block {
-  margin-top: 10px;          /* space between video and overlay-bar  */
+  position: relative;
+  inset: 0;
+  pointer-events: none;       /* clicks go through to iframe */
   display: flex;
   flex-direction: column;
-  align-items: center;       /* centre scoreboard horizontally       */
-  gap: 18px;                 /* space between scoreboard & players   */
-  width: 70vw;
+  justify-content: space-between;
+  background-color: rgba(20,20,20,0.7);
 }
-
-.chat {
-    width: 29vw;
-    height: calc(100% - 60px);
-}
-
-/* scoreboard no longer absolute – regular block flow is fine */
+/* ========== SCOREBOARD =================================== */
 .scoreboard {
-  position: static;          /* <— was absolute                     */
+  margin-top: 6px;
   display: flex;
-  gap: 12px;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-/* players list: also position static, 100 % width, centred contents */
-.players {
-  position: static;
-  width: 100%;
-  display: flex;
-  gap: 20px;
-  padding: 0 20px;
-  box-sizing: border-box;
   justify-content: center;
->>>>>>> Stashed changes
+  align-items: center;
+  gap: 10px;
+  font-size: 34px;
+  font-weight: 700;
+  text-shadow: 0 0 8px #000;
 }
 
-.team-col        { flex: 1; display: flex; flex-direction: column; gap: 14px; }
-.player-card     { background:#111;border-radius:6px;padding:10px 14px 14px;font-size:.9rem;line-height:1.3 }
-.player-card.dead{ opacity:.4 }
-.player-card .name   { font-weight:600;margin-bottom:4px }
-.player-card .money  { float:right }
-.player-card .stats  { display:flex;gap:10px;align-items:center;white-space:nowrap }
-.player-card .weapon { width:50px;height:50px;object-fit:contain;filter: invert(100%); }
-.player-card .hp-bar { height:6px;background:#333;margin-top:6px;border-radius:4px;overflow:hidden }
-.player-card .hp-fill{ height:100%;background:#1db954 }
-.player-card.dead .hp-fill { background:#a00; }
+.scoreboard div {
+  padding: 2px 14px;
+  border-radius: 6px;
+  background: var(--bg-transparent);
+  padding: 1vh;
+  margin: 1vh;
+}
+
+#team1 { color: var(--team-t);  }
+#team2 { color: var(--team-ct); }
+
+/* ========== PLAYERS GRID ================================= */
+.players {
+  padding: 0 2%;
+  margin-bottom: 2%;
+  display: flex;
+  gap: 2%;
+}
+
+.team-col {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ========== INDIVIDUAL PLAYER CARD ====================== */
+.player-card {
+  background: var(--bg-transparent);
+  border: 1px solid var(--border-faint);
+  border-radius: 4px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.25s ease;
+  height: 81px;
+}
+
+.player-card.dead {
+  opacity: 0.35;
+}
+
+.player-card .name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.player-card .money {
+  color: #c7d42a;
+  font-weight: 500;
+}
+
+.player-card .stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  gap: 4px;
+}
+
+.weapon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: invert(100%);
+}
+
+/* HP bar -------------------------------------------------- */
+.hp-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: #333;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.hp-fill {
+  height: 100%;
+  background: var(--hp-green);
+  transition: width 0.25s ease, background 0.25s ease;
+}
+
+/* turn bar red if low HP (handled by inline width) */
+.player-card[data-lowhp="true"] .hp-fill {
+  background: var(--hp-red);
+}
+
+/* ========== RESPONSIVE TWEAKS ============================ */
+@media (max-width: 900px) {
+  .scoreboard { font-size: 26px; }
+  .player-card .name    { font-size: 13px; }
+  .player-card .stats   { font-size: 11px; }
+  .weapon               { width: 20px; height: 20px; }
+}
+
+@media (max-width: 650px) {
+  .players { flex-direction: column; }
+  .team-col { gap: 8px; }
+}
 
 /* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
 /** {
@@ -227,247 +244,33 @@ iframe#twitch-player {
 
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
-  height: 15px;
-  width: 15px;
+  height: 14px;
+  width: 14px;
 }
-<<<<<<< Updated upstream
-
-.player-card {
-    position: relative;
-    transition: background-color 0.5s ease;
-    background-color: transparent;
-    /* optional base style */
-}
-
-    .player-card.flashed {
-        background-color: rgba(255, 255, 255, 0.3); /* white backlight */
-        transition: background-color 1s ease-out;
-    }
-
-    .player-card.hurt {
-        animation: hurtFlash 0.3s ease;
-    }
-
-@keyframes hurtFlash {
-    0% {
-        box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.8);
-        background-color: rgba(255, 0, 0, 0.3);
-    }
-
-    100% {
-        box-shadow: none;
-        background-color: transparent;
-    }
-}
-
-.player-card {
-    border-bottom: 1px solid #444;
-    padding: 8px 12px;
-    font-family: Arial, sans-serif;
-    color: white;
-    background-color: #222;
-    margin-bottom: 4px;
-    transition: background-color 0.5s ease;
-    position: relative;
-=======
 *::-webkit-scrollbar-track {
   border-radius: 20px;
   background-color: #222222;
-  border: 1px ridge #FFFFFF;
+  border: 2px solid #FFFFFF;
 }
 
 *::-webkit-scrollbar-track:hover {
-  background-color: #3C3C3C;
->>>>>>> Stashed changes
+  background-color: #222222;
 }
 
 *::-webkit-scrollbar-track:active {
-  background-color: #555555;
+  background-color: #222222;
 }
 
 *::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background-color: #FFFFFF;
-  border: 1px solid #222222;
+  border: 2px solid #000000;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: #D7D7D7;
-}
-
-<<<<<<< Updated upstream
-.weapon-icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    filter: invert(100%) brightness(150%);
-}
-
-.health-bar {
-    background: #555;
-    border-radius: 3px;
-    height: 6px;
-    margin-top: 8px;
-    overflow: hidden;
-}
-
-.health-fill {
-    background: #4caf50;
-    height: 100%;
-    transition: width 0.3s ease;
-}
-
-.player-card.flashed {
-    background-color: rgba(255, 255, 255, 0.3);
-    transition: background-color 1s ease-out;
-}
-
-.player-card.hurt {
-    animation: hurtFlash 0.3s ease;
-}
-
-@keyframes hurtFlash {
-    0% {
-        box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.8);
-        background-color: rgba(255, 0, 0, 0.3);
-    }
-
-    100% {
-        box-shadow: none;
-        background-color: #222;
-    }
-}
-
-.weapon-icon img {
-    height: 24px;
-    vertical-align: middle;
-    filter: invert(1); /* optional, if your SVGs are dark and your background is dark */
-}
-=======
-*::-webkit-scrollbar-thumb:active {
-  background-color: #CACACA;
-}
->>>>>>> Stashed changes
-=======
-  margin: 0;
-  height: 100%;
-  background: #000;
-  color: #fff;
-  font-family: sans-serif;
-  overflow-y: hidden;
-}
-
-.container {
-  display: flex;
-  height: 100%;
-}
-
-.main {
-  flex: 1;
-  height: calc(100% - 60px);
-  overflow-y: scroll;
-  width: 70vw;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  padding: 6px 12px;
-  background: #222;
-  color: #fff;
-  position: sticky;
-  top: 0;
-}
-
-/* video keeps full width; 16 : 9 ratio so the height collapses nicely */
-iframe#twitch-player {
-  width: 70vw;
-  aspect-ratio: 16 / 9;
-  border: none;
-}
-
-/* === block that now lives under the video ========================= */
-.overlay-block {
-  margin-top: 10px;          /* space between video and overlay-bar  */
-  display: flex;
-  flex-direction: column;
-  align-items: center;       /* centre scoreboard horizontally       */
-  gap: 18px;                 /* space between scoreboard & players   */
-  width: 70vw;
-}
-
-.chat {
-    width: 29vw;
-    height: calc(100% - 60px);
-}
-
-/* scoreboard no longer absolute – regular block flow is fine */
-.scoreboard {
-  position: static;          /* <— was absolute                     */
-  display: flex;
-  gap: 12px;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-/* players list: also position static, 100 % width, centred contents */
-.players {
-  position: static;
-  width: 100%;
-  display: flex;
-  gap: 20px;
-  padding: 0 20px;
-  box-sizing: border-box;
-  justify-content: center;
-}
-
-.team-col        { flex: 1; display: flex; flex-direction: column; gap: 14px; }
-.player-card     { background:#111;border-radius:6px;padding:10px 14px 14px;font-size:.9rem;line-height:1.3 }
-.player-card.dead{ opacity:.4 }
-.player-card .name   { font-weight:600;margin-bottom:4px }
-.player-card .money  { float:right }
-.player-card .stats  { display:flex;gap:10px;align-items:center;white-space:nowrap }
-.player-card .weapon { width:50px;height:50px;object-fit:contain;filter: invert(100%); }
-.player-card .hp-bar { height:6px;background:#333;margin-top:6px;border-radius:4px;overflow:hidden }
-.player-card .hp-fill{ height:100%;background:#1db954 }
-.player-card.dead .hp-fill { background:#a00; }
-
-/* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
-/** {
-  scrollbar-width: thin;
-  scrollbar-color: #FFFFFF #222222;
-}*/
-
-/* Chrome, Edge and Safari */
-*::-webkit-scrollbar {
-  height: 15px;
-  width: 15px;
-}
-*::-webkit-scrollbar-track {
-  border-radius: 20px;
-  background-color: #222222;
-  border: 1px ridge #FFFFFF;
-}
-
-*::-webkit-scrollbar-track:hover {
-  background-color: #3C3C3C;
-}
-
-*::-webkit-scrollbar-track:active {
-  background-color: #555555;
-}
-
-*::-webkit-scrollbar-thumb {
-  border-radius: 6px;
   background-color: #FFFFFF;
-  border: 1px solid #222222;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background-color: #D7D7D7;
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background-color: #CACACA;
+  background-color: #E1E1E1;
 }
->>>>>>> Stashed changes

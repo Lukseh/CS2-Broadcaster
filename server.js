@@ -151,6 +151,7 @@ function renderOverlayHTML (inst, all) {
     }
     poll();
   </script>
+  <link href="https://fonts.googleapis.com/css2?family=Microsoft+YaHei:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>

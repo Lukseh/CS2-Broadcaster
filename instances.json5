@@ -3,7 +3,7 @@
     "instances": [
   {
     "id": "primary",
-    "twitch_channel": "pugsharky",
+    "twitch_channel": "rocketleague",
     "url": 'primary',
     "delay_ms": 8000,
     parent_domain: "localhost",
@@ -17,7 +17,7 @@
   },
   {
     "id": "secondary",
-    "twitch_channel": "lukseh74",
+    "twitch_channel": "xgolabekx",
     "url": '/secondary',
     "delay_ms": 8000,
     parent_domain: "localhost",
