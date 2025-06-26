@@ -107,7 +107,17 @@ function renderOverlayHTML (inst, all) {
     }
 
     /* rendering ------------------------------------------------------ */
+    let currentMap = '';
+
+    function updateMapBackground (gsi) {
+      const mapName = gsi?.map?.name;        // e.g. "de_cache"
+      if (!mapName || mapName === currentMap) return;
+    const url = 'https://raw.githubusercontent.com/ghostcap-gaming/cs2-map-images/refs/heads/main/cs2/' + mapName + '.png';
+    document.querySelector('.main').style.backgroundImage = 'url(' + url + ')';
+    currentMap = mapName;
+  }
     function renderPlayers(gsi){
+    updateMapBackground(gsi);
       $left.innerHTML = ''; $right.innerHTML = '';
       if(!gsi?.allplayers) return;
 
@@ -121,9 +131,17 @@ function renderOverlayHTML (inst, all) {
           <div class="stats">
             <span>HP \${p.state.health}</span>
             <span>AR \${p.state.armor}</span>
+            <span>K \${p.match_stats.kills}</span>
+            <span>A \${p.match_stats.assists}</span>
+            <span>D \${p.match_stats.deaths}</span>
             \${weaponIcon(active)}
           </div>
           <div class="hp-bar"><div class="hp-fill" style="width:\${p.state.health}%"></div></div>\`;
+          if (p.state.health <= 30 && p.state.health > 0) {
+            card.classList.add('low-hp');
+          } else {
+            card.classList.remove('low-hp');
+          }
         col.appendChild(card);
       });
     }
@@ -161,7 +179,7 @@ function renderOverlayHTML (inst, all) {
       <div class="overlay-block">
         <div class="scoreboard">
           <div id="team1"></div>
-          <div id="score"></div>
+          <div id="score">Loading data...</div>
           <div id="team2"></div>
         </div>
         <div class="players" id="players"></div>

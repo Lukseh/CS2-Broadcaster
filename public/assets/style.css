@@ -20,7 +20,7 @@ html, body {
 
 /* ========== COLOR VARIABLES ============================== */
 :root {
-  --bg-transparent: rgba(0, 0, 0, 0.65);
+  --bg-transparent: rgba(0, 0, 0, 0.8);
   --border-faint:   rgba(255, 255, 255, 0.18);
   --hp-green:       #3fcf3f;
   --hp-red:         #d33;
@@ -85,8 +85,15 @@ nav option {
   overflow: hidden;
   overflow-y: scroll;
   width: 60vw;
-  background-image: url(https://raw.githubusercontent.com/ghostcap-gaming/cs2-map-images/refs/heads/main/cs2/de_cache.png);
-  background-position-y: bottom;
+  background-size:     cover;   /* or 'contain' if you prefer full map */
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+.overlay-block{
+  background: rgba(20,20,20,0.6);
+  height: 85vh;
+  overflow-y: hidden;
 }
 
 .chat {
@@ -110,38 +117,40 @@ iframe {
   border: none;
 }
 
-/* ========== OVERLAY BLOCK ================================ */
-.overlay-block {
-  position: relative;
-  inset: 0;
-  pointer-events: none;       /* clicks go through to iframe */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: rgba(20,20,20,0.7);
-}
 /* ========== SCOREBOARD =================================== */
 .scoreboard {
-  margin-top: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  font-size: 34px;
+  margin: 6px auto;
+  padding: 1vh 2vh;
+  background: var(--bg-transparent);
+  border-radius: 120px;
+  font-size: 25px;
   font-weight: 700;
   text-shadow: 0 0 8px #000;
+
+  /* Use CSS Grid for symmetrical layout */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* side columns expand equally, score auto-width */
+  column-gap: 10px;
+  align-items: center;
+  width: fit-content;
 }
 
-.scoreboard div {
-  padding: 2px 14px;
-  border-radius: 6px;
-  background: var(--bg-transparent);
-  padding: 1vh;
-  margin: 1vh;
+/* Align team names to their sides */
+#team1 {
+  justify-self: end;
+  color: var(--team-t);
+}
+#team2 {
+  justify-self: start;
+  color: var(--team-ct);
 }
 
-#team1 { color: var(--team-t);  }
-#team2 { color: var(--team-ct); }
+/* Center the score */
+#score {
+  justify-self: center;
+  width: max-content;
+  text-align: center;
+}
 
 /* ========== PLAYERS GRID ================================= */
 .players {
@@ -156,6 +165,7 @@ iframe {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 60vh;
 }
 
 /* ========== INDIVIDUAL PLAYER CARD ====================== */
@@ -167,11 +177,11 @@ iframe {
   display: flex;
   flex-direction: column;
   transition: opacity 0.25s ease;
-  height: 81px;
+  height: 120px;
 }
 
 .player-card.dead {
-  opacity: 0.35;
+  opacity: 0.7;
 }
 
 .player-card .name {
@@ -218,8 +228,7 @@ iframe {
   transition: width 0.25s ease, background 0.25s ease;
 }
 
-/* turn bar red if low HP (handled by inline width) */
-.player-card[data-lowhp="true"] .hp-fill {
+.player-card.low-hp .hp-fill {
   background: var(--hp-red);
 }
 
