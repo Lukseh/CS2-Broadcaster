@@ -1,0 +1,34 @@
+// instances.json5
+{
+    "instances": [
+  {
+    "id": "primary",
+    "twitch_channel": "pugsharky",
+    "url": 'primary',
+    "delay_ms": 8000,
+    parent_domain: "localhost",
+    page_title: "OpenR League",
+    page_name: "OpenR Broadcaster",
+    redis_host  : '127.0.0.1',
+    redis_port  : 6379,
+    redis_db    : 0,
+    redis_user  : 'user',
+    redis_pass  : 'PasswordRedis'
+  },
+  {
+    "id": "secondary",
+    "twitch_channel": "lukseh74",
+    "url": '/secondary',
+    "delay_ms": 8000,
+    parent_domain: "localhost",
+    page_title: "OpenR League",
+    page_name: "OpenR Broadcaster",
+    redis_host  : '127.0.0.1',
+    redis_port  : 6379,
+    redis_db    : 1,
+    redis_user  : 'user',
+    redis_pass  : 'PasswordRedis'
+  }
+  // Add more instances here easily
+]
+}
