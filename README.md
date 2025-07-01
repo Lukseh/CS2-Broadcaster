@@ -1,4 +1,4 @@
-# WEB-BROADCAST-CS2
+# CS2-BroadcasteR
 Simple web project for your cs2 matches.
 
 
@@ -9,7 +9,8 @@ I don't take responsibility for opening ports in any other case.
 Advised usage of cloudflared tunnel / proxy (nginx, apache, caddy)
 
 ## 🔧 Installation
-To install ( Run commands with administrator privileges (use sudo on Linux or run as Administrator on Windows):<br>
+To install ( Run commands with administrator privileges (use sudo on Linux or run as Administrator on Windows):
+
 - open command line and use
   ```ruby
   git clone https://github.com/Lukseh/WEB-BROADCAST-CS2.git
